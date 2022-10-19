@@ -27,9 +27,14 @@ all_posts = [
 ]
 
 def find_post(id):
-    for post in all_posts:
-        if post['id'] == int(id):
-            return post
+    try:
+        for post in all_posts:
+            if post['id'] == int(id):
+                return post
+        return {"error": f"no post found with id {id}"}
+    except:
+        return {"error": "we encoutered some issue"}
+
 
 @app.get('/')
 def root():
