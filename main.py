@@ -29,12 +29,11 @@ all_posts = [
 def find_post(id):
     try:
         for post in all_posts:
-            if post['id'] == int(id):
+            if post['id'] == id:
                 return post
         return {"error": f"no post found with id {id}"}
     except:
         return {"error": "we encoutered some issue"}
-
 
 @app.get('/')
 def root():
@@ -52,6 +51,6 @@ async def posts(post: Post):
     return {"message": "post created!", "data": post_dict}
 
 @app.get('/posts/{id}')
-def posts(id):
+def posts(id: int):
     post = find_post(id)
     return {"data": post}
